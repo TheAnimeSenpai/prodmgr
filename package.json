@@ -1,0 +1,63 @@
+{
+  "name": "prodmgr",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "sails": "^1.4.0",
+    "grunt": "1.0.4",
+    "sails-hook-grunt": "^4.0.0",
+    "sails-hook-orm": "^3.0.1",
+    "sails-hook-sockets": "^2.0.0",
+    "@sailshq/connect-redis": "^3.2.1",
+    "@sailshq/socket.io-redis": "^5.2.0",
+    "@sailshq/lodash": "^3.10.3",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "argon2": "^0.27.1",
+    "axios": "^0.21.1",
+    "lodash": "^4.17.20",
+    "faker": "^5.4.0",
+    "winston": "^3.2.1",
+    "http-status-codes": "^2.1.4"
+  },
+  "devDependencies": {
+    "eslint": "5.16.0",
+    "jest": "^26.0.1",
+    "supertest": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/config/setup.js",
+      "<rootDir>/tests/config/jestExtenders.js"
+    ]
+  },
+  "scripts": {
+    "db:migrate": "knex migrate:latest",
+    "db:seed": "knex seed:run",
+    "db:test:create": "node ./tests/db/setup.js",
+    "db:test:migrate": "NODE_ENV=test && knex migrate:latest",
+    "db:test:seed": "NODE_ENV=test && knex seed:run",
+    "db:test:setup": "npm run db:test:migrate && npm run db:test:seed",
+    "start": "NODE_ENV=production && node app.js",
+    "dev": "node app.js",
+    "test": "npm run custom-tests && echo 'Done.'",
+    "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
+    "custom-tests": "npm run db:test:setup && jest --runInBand --coverage",
+    "custom-tests-detection": "npm run db:test:setup && jest --runInBand --coverage --detectOpenHandles",
+    "custom-tests-watch": "npm run db:test:setup && jest --watch --runInBand --coverage"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anonymous node/sails user/prodmgr.git"
+  },
+  "author": "anonymous node/sails user",
+  "license": "",
+  "engines": {
+    "node": "^14.15"
+  }
+}
